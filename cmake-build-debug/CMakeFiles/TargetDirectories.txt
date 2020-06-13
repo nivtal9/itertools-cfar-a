@@ -1,0 +1,3 @@
+/home/nivtal9/CLionProjects/itertools-cfar-a/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/nivtal9/CLionProjects/itertools-cfar-a/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/nivtal9/CLionProjects/itertools-cfar-a/cmake-build-debug/CMakeFiles/itertools-cfar-a.dir
