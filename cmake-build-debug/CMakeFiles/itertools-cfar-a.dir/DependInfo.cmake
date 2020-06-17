@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/nivtal9/CLionProjects/itertools-cfar-a/Demo.cpp" "/home/nivtal9/CLionProjects/itertools-cfar-a/cmake-build-debug/CMakeFiles/itertools-cfar-a.dir/Demo.cpp.o"
   "/home/nivtal9/CLionProjects/itertools-cfar-a/Test.cpp" "/home/nivtal9/CLionProjects/itertools-cfar-a/cmake-build-debug/CMakeFiles/itertools-cfar-a.dir/Test.cpp.o"
   "/home/nivtal9/CLionProjects/itertools-cfar-a/TestCounter.cpp" "/home/nivtal9/CLionProjects/itertools-cfar-a/cmake-build-debug/CMakeFiles/itertools-cfar-a.dir/TestCounter.cpp.o"
+  "/home/nivtal9/CLionProjects/itertools-cfar-a/TestRunner.cpp" "/home/nivtal9/CLionProjects/itertools-cfar-a/cmake-build-debug/CMakeFiles/itertools-cfar-a.dir/TestRunner.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

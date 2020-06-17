@@ -204,6 +204,33 @@ TestCounter.cpp.s:
 	$(MAKE) -f CMakeFiles/itertools-cfar-a.dir/build.make CMakeFiles/itertools-cfar-a.dir/TestCounter.cpp.s
 .PHONY : TestCounter.cpp.s
 
+TestRunner.o: TestRunner.cpp.o
+
+.PHONY : TestRunner.o
+
+# target to build an object file
+TestRunner.cpp.o:
+	$(MAKE) -f CMakeFiles/itertools-cfar-a.dir/build.make CMakeFiles/itertools-cfar-a.dir/TestRunner.cpp.o
+.PHONY : TestRunner.cpp.o
+
+TestRunner.i: TestRunner.cpp.i
+
+.PHONY : TestRunner.i
+
+# target to preprocess a source file
+TestRunner.cpp.i:
+	$(MAKE) -f CMakeFiles/itertools-cfar-a.dir/build.make CMakeFiles/itertools-cfar-a.dir/TestRunner.cpp.i
+.PHONY : TestRunner.cpp.i
+
+TestRunner.s: TestRunner.cpp.s
+
+.PHONY : TestRunner.s
+
+# target to generate assembly for a file
+TestRunner.cpp.s:
+	$(MAKE) -f CMakeFiles/itertools-cfar-a.dir/build.make CMakeFiles/itertools-cfar-a.dir/TestRunner.cpp.s
+.PHONY : TestRunner.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -222,6 +249,9 @@ help:
 	@echo "... TestCounter.o"
 	@echo "... TestCounter.i"
 	@echo "... TestCounter.s"
+	@echo "... TestRunner.o"
+	@echo "... TestRunner.i"
+	@echo "... TestRunner.s"
 .PHONY : help
 
 

@@ -91,6 +91,9 @@
 		<Unit filename="/home/nivtal9/CLionProjects/itertools-cfar-a/TestCounter.cpp">
 			<Option target="itertools-cfar-a"/>
 		</Unit>
+		<Unit filename="/home/nivtal9/CLionProjects/itertools-cfar-a/TestRunner.cpp">
+			<Option target="itertools-cfar-a"/>
+		</Unit>
 		<Unit filename="/home/nivtal9/CLionProjects/itertools-cfar-a/accumulate.hpp">
 			<Option target="itertools-cfar-a"/>
 		</Unit>

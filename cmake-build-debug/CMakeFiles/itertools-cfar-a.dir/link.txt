@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/itertools-cfar-a.dir/Demo.cpp.o CMakeFiles/itertools-cfar-a.dir/TestCounter.cpp.o CMakeFiles/itertools-cfar-a.dir/Test.cpp.o  -o itertools-cfar-a 
+/usr/bin/c++  -g   CMakeFiles/itertools-cfar-a.dir/Demo.cpp.o CMakeFiles/itertools-cfar-a.dir/TestCounter.cpp.o CMakeFiles/itertools-cfar-a.dir/Test.cpp.o CMakeFiles/itertools-cfar-a.dir/TestRunner.cpp.o  -o itertools-cfar-a 

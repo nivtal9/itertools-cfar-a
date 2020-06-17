@@ -1,65 +1,52 @@
-//
-// Created by nivtal9 on 9.6.2020.
-//
-
-#ifndef ITERTOOLS_CFAR_A_FILTERFALSE_HPP
-#define ITERTOOLS_CFAR_A_FILTERFALSE_HPP
+#include <iostream>
+#include <string>
 using namespace std;
-namespace itertools {
-    class filterfalse {
+
+namespace itertools{
+    template <typename condi, typename cont>
+    class filterfalse
+    {
     private:
-        int bottom;
-        int top;
-        //inner class iterator begin
-        class iterator{
-        private:
-            int cur;
-        public:
-            bool operator==(const iterator &ite) const {
-                return cur == ite.cur;
-            }
-
-            bool operator!=(const iterator &ite) const {
-                return cur != ite.cur;
-            }
-            iterator(int curr): cur(curr){}
-            iterator &operator++ () {
-                cur += 1;
-                return *(this);
-            }
-            const iterator operator++ (int) {
-                iterator t = *(this);
-                cur = cur + 1;
-                return t;
-            }
-            iterator &operator-- () {
-                cur += - 1;
-                return *(this);
-            }
-            const iterator operator-- (int) {
-                iterator t = *(this);
-                cur += - 1;
-                return t;
-            }
-            int operator*() {
-                return cur;
-            }
-        };
-        //inner class iterator end
+        cont container;
+        condi condition;
     public:
-        template <class T> filterfalse(T) {
-                //adding code later
-        }
-        template <typename Func,class T> filterfalse(Func, T) {
-            //adding code later
-        }
-        iterator begin(){
-            return iterator(bottom);
+        filterfalse(condi co, cont c):container(c),condition(co){}
+
+        class iterator {
+            typename cont::iterator start_it;
+            typename cont::iterator end_it;
+            condi condition;
+        public:
+            iterator(typename cont::iterator s_it,typename cont::iterator e_it,condi co):
+                    start_it(s_it),end_it(e_it), condition(co){}
+
+            auto operator*()  {
+                if(condition(*start_it))
+                    ++(*this);
+                return *start_it;
+            }
+
+            iterator& operator++() {
+                do {start_it++;}
+                while(start_it!= end_it && condition(*start_it));
+                return *this;
+            }
+
+            bool operator==(const iterator& other) const {
+                return start_it == other.start_it;
+            }
+
+            bool operator!=(const iterator& other) const {
+                return start_it != other.start_it;
+            }
+        }; // END OF CLASS ITERATOR
+
+        iterator begin() {
+            return iterator{container.begin(),container.end(),condition};
         }
 
-        iterator end(){
-            return iterator(top);
+        iterator end() {
+            return iterator{container.end(),container.end(),condition};
         }
     };
 }
-#endif //ITERTOOLS_CFAR_A_FILTERFALSE_HPP
