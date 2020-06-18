@@ -1,52 +1,54 @@
-#include <iostream>
-#include <string>
-using namespace std;
+//
+// Created by nivtal9 & AVI HAIMOV on 13.6.2020.
+//
 
 namespace itertools{
-    template <typename condi, typename cont>
+    template <typename con, typename bucket>
     class filterfalse
     {
     private:
-        cont container;
-        condi condition;
+        bucket buck;
+        con cond;
     public:
-        filterfalse(condi co, cont c):container(c),condition(co){}
+        filterfalse(con co, bucket c): buck(c), cond(co){}
 
         class iterator {
-            typename cont::iterator start_it;
-            typename cont::iterator end_it;
-            condi condition;
+            con condition;
+            typename bucket::iterator start_it;
+            typename bucket::iterator end_it;
         public:
-            iterator(typename cont::iterator s_it,typename cont::iterator e_it,condi co):
-                    start_it(s_it),end_it(e_it), condition(co){}
+            iterator(typename bucket::iterator start_iterator, typename bucket::iterator end_iterator, con co):
+                    start_it(start_iterator), end_it(end_iterator), condition(co){
 
-            auto operator*()  {
-                if(condition(*start_it))
-                    ++(*this);
-                return *start_it;
             }
-
             iterator& operator++() {
-                do {start_it++;}
+                do {
+                    start_it++;
+                }
                 while(start_it!= end_it && condition(*start_it));
                 return *this;
             }
-
-            bool operator==(const iterator& other) const {
-                return start_it == other.start_it;
+            auto operator*() {
+                if (condition(*start_it)) {
+                ++(*this);
+                }
+                return *(start_it);
             }
 
             bool operator!=(const iterator& other) const {
                 return start_it != other.start_it;
             }
-        }; // END OF CLASS ITERATOR
+            bool operator==(const iterator& other) const {
+                return start_it == other.start_it;
+            }
+        };
 
         iterator begin() {
-            return iterator{container.begin(),container.end(),condition};
+            return iterator{buck.begin(), buck.end(), cond};
         }
 
         iterator end() {
-            return iterator{container.end(),container.end(),condition};
+            return iterator{buck.end(), buck.end(), cond};
         }
     };
 }

@@ -1,65 +1,50 @@
 //
-// Created by nivtal9 on 9.6.2020.
+// Created by nivtal9 & AVI HAIMOV on 13.6.2020.
 //
 
-#ifndef ITERTOOLS_CFAR_A_RANGE_HPP
-#define ITERTOOLS_CFAR_A_RANGE_HPP
-using namespace std;
-namespace itertools {
-    //template <typename T>
-    class range {
-    private:
-        int bottom;
-        int top;
+namespace itertools{
+    class range{
+        int top, bottom ;
     public:
-        range(int x, int y) : bottom(x), top(y) {
-            //adding methods later
-        }
-
-        //inner class iterator begin
+        ///start of iterator
         class iterator{
         private:
-            int cur;
+            int curr;
         public:
-            iterator(int curr): cur(curr){}
-            bool operator==(const iterator &ite) const {
-                return cur == ite.cur;
+            iterator(int c){
+                this->curr=c;
+            }
+            int operator *() {
+                return curr;
+            }
+            const iterator operator ++(int) {
+                iterator t = *(this);
+                curr ++;
+                return t;
+            }
+            iterator& operator ++() {
+                curr ++;
+                return *(this);
+            }
+            bool operator !=(const iterator& r) const {
+                return this->curr != r.curr;
             }
 
-            bool operator!=(const iterator &ite) const {
-                return cur != ite.cur;
+            bool operator ==(const iterator& r) const {
+                return this->curr == r.curr;
             }
-            iterator &operator++ () {
-                cur += 1;
-                return *(this);
-            }
-            const iterator operator++ (int) {
-                iterator t = *(this);
-                cur = cur + 1;
-                return t;
-            }
-            iterator &operator-- () {
-                cur += - 1;
-                return *(this);
-            }
-            const iterator operator-- (int) {
-                iterator t = *(this);
-                cur += - 1;
-                return t;
-            }
-            int operator*() {
-                return cur;
-            }
-        };
-        //inner class iterator end
+        };///end of iterator
+        typedef int	value_type;
+        range(int t, int b){
+            top=t;
+            bottom=b;
+        }
         iterator begin() {
-            return bottom;
+            return iterator{top};
         }
 
         iterator end() {
-            return top;
+            return iterator{bottom};
         }
     };
-
 }
-#endif //ITERTOOLS_CFAR_A_RANGE_HPP

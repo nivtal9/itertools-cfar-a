@@ -1,66 +1,69 @@
-#include <iostream>
-#include <string>
-using namespace std;
-
+//
+// Created by nivtal9 & AVI HAIMOV on 13.6.2020.
+//
 namespace itertools{
-    class plus
+    class combine
     {
     public:
         template <typename T>
-        T operator()(T a, T b) { return a + b; }
+        T operator() (T x, T y) const{
+            return x + y;
+        }
     };
-    template <typename cont, typename func = plus>
+    template <typename container, typename function = combine>
     class accumulate
     {
-        cont container;
-        func function;
-        typedef typename cont::value_type value_type;
+        function fun;
+        container con;
     public:
-        accumulate(cont c , func f=plus()):container(c),function(f){}
 
+        accumulate(container c , function f=combine()): con(c), fun(f){
+        }
+        ///start of iterator
         class iterator {
-            typename cont::iterator start_it;
-            typename cont::iterator end_it;
-            typename cont::value_type sum;
-            func function;
+            typename container::value_type allsum;
+            typename container::iterator start_iterator;
+            typename container::iterator end_it;
+            function func;
         public:
-            iterator(typename cont::iterator s_it,typename cont::iterator e_it,func f):
-                    start_it(s_it),end_it(e_it), sum(*s_it), function(f){}
-
-            auto operator*() {
-                return sum;
+            iterator(typename container::iterator s_it, typename container::iterator e_it, function f):
+                    start_iterator(s_it), end_it(e_it), allsum(*s_it), func(f){
             }
 
-            iterator& operator++() {
-                ++start_it;
-                if(start_it!=end_it)
-                    sum= function(sum,*start_it);
-                return *this;
+            auto operator*() {
+                return allsum;
             }
 
             const iterator operator++(int) {
-                iterator tmp= *this;
-                ++start_it;
-                if(start_it!=end_it)
-                    sum= function(sum,*start_it);
-                return tmp;
+                iterator t= *(this);
+                start_iterator++;
+                if(end_it!=start_iterator) {
+                    allsum = func(allsum, *start_iterator);
+                }
+                return t;
+            }
+            iterator& operator++() {
+                start_iterator++;
+                if( end_it!=start_iterator ) {
+                    allsum = func(allsum, *start_iterator);
+                }
+                return *(this);
             }
 
-            bool operator==(const iterator& other) const {
-                return start_it == other.start_it;
+            bool operator !=(const iterator& other) const {
+                return other.start_iterator!=start_iterator;
             }
-
-            bool operator!=(const iterator& other) const {
-                return start_it != other.start_it;
+            bool operator ==(const iterator& other) const {
+                return other.start_iterator== start_iterator ;
             }
-        }; // END OF CLASS ITERATOR
+        }; ///end of iterator
 
         iterator begin() {
-            return iterator{container.begin(),container.end(),function};
+            return iterator{con.begin(),con.end(),fun};
         }
 
         iterator end() {
-            return iterator{container.end(),container.end(),function};
+            return iterator{con.end(),con.end(),fun};
         }
     };
 }

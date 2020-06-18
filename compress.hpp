@@ -1,59 +1,61 @@
-#include <iostream>
-#include <string>
-using namespace std;
-
+//
+// Created by nivtal9 & AVI HAIMOV on 13.6.2020.
+//
 namespace itertools{
-    template <typename cont, typename cont2 >
+    template <typename bucket, typename bucket2 >
     class compress
     {
-        //private:
-        cont container;
-        cont2 cont_flags;
+        bucket con;
+        bucket2 con_flag;
     public:
-        compress(cont c , cont2 f):container(c),cont_flags(f){}
+        compress(bucket cont , bucket2 fun): con(cont), con_flag(fun){
+
+        }
 
         class iterator {
-            typename cont::iterator start_it;
-            typename cont::iterator end_it;
-            typename cont2::iterator startF_it;
-            typename cont2::iterator endF_it;
+            typename bucket::iterator start_it;
+            typename bucket2::iterator startF_it;
+            typename bucket::iterator end_it;
+            typename bucket2::iterator endF_it;
         public:
-            iterator(typename cont::iterator s_it,typename cont::iterator e_it, typename cont2::iterator sF_it, typename cont2::iterator eF_it):
-                    start_it(s_it),end_it(e_it), startF_it(sF_it),endF_it(eF_it){}
+            iterator(typename bucket::iterator start_iterator, typename bucket::iterator end_iterator,
+                    typename bucket2::iterator startF_iterator, typename bucket2::iterator endF_iterator):
+                    start_it(start_iterator), end_it(end_iterator), startF_it(startF_iterator), endF_it(endF_iterator){}
 
             auto operator*() {
-                if(!(*startF_it))
+                if(!*startF_it) {
                     ++(*this);
+                }
                 return *start_it;
             }
 
-            iterator& operator++() {
-                do {++start_it; ++startF_it;}
-                while(start_it!= end_it && !(*startF_it));
-                return *this;
-            }
-
             const iterator operator++(int) {
-                iterator tmp= *this;
+                iterator t= *(this);
                 ++(*this);
-                return tmp;
+                return t;
             }
-
-            bool operator==(const iterator& other) const {
-                return (start_it == other.start_it) && (startF_it == other.startF_it);
+            iterator& operator++() {
+                do {
+                    start_it++;
+                    startF_it++;
+                }
+                while(start_it!= end_it && !(*startF_it));
+                return *(this);
             }
-
             bool operator!=(const iterator& other) const {
                 return (start_it != other.start_it) || (startF_it != other.startF_it);
             }
-        }; // END OF CLASS ITERATOR
+            bool operator==(const iterator& other) const {
+                return (start_it == other.start_it) && (startF_it == other.startF_it);
+            }
+        };
 
         iterator begin() {
-            return iterator{container.begin(),container.end(),cont_flags.begin(),cont_flags.end()};
+            return iterator{con.begin(), con.end(), con_flag.begin(), con_flag.end()};
         }
 
         iterator end() {
-            return iterator{container.end(),container.end(),cont_flags.end(),cont_flags.end()};
+            return iterator{con.end(), con.end(), con_flag.end(), con_flag.end()};
         }
     };
 }
